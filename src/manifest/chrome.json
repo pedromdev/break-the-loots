@@ -1,0 +1,30 @@
+{
+	"manifest_version": 2,
+	"name": "Break The Loots",
+	"description": "Costume your messages and send them automatically",
+	"version": "<version>",
+	"icons": {
+		"128": "icon128.png"
+	},
+	"browser_action": {
+		"default_icon": "action_icon.png",
+		"default_popup": "popup.html"
+	},
+	"options_page": "options.html",
+	"permissions": [
+		"activeTab",
+		"storage",
+		"tabs",
+    "https://www.twitch.tv/*",
+		"https://loots.com/*/tip-jars/*"
+	],
+	"background": {
+		"scripts": [ "background.js" ]
+	},
+	"content_scripts": [
+		{
+			"matches": [ "https://loots.com/*/tip-jars/*" ],
+			"js": [ "main.js" ]
+		}
+	]
+}
