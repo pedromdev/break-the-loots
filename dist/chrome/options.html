@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+	<title>Break The Loots</title>
+</head>
+
+<body>
+	<div id="container">
+		<div class="collumns">
+			<h1>Break The Loots</h1>
+			<p>This extension simplifies your spam on Loots website. You just need to check the Google Recaptcha and the extension sends your loots.</p>
+
+			<div class="field-group">
+				<label for="message">Message:</label>
+				<textarea name="message" id="message"></textarea>
+				<span class="error" id="message-error"></span>
+			</div>
+			<button id="save">Save</button>
+			
+			<h4>Available variables:</h4>
+			<ul>
+				<li>{count}: Streamer's counter. 1-<span id="count-size"></span> character(s)</li>
+				<li>{date}: Current date. <span id="date-size"></span> character(s)</li>
+				<li>{time}: Current time. <span id="time-size"></span> character(s)</li>
+				<li>{datetime}: Current date and time. <span id="datetime-size"></span> character(s)</li>
+			</ul>
+		</div>
+		<div class="collumns">
+			<h2>Twitch Follows</h2>
+			<p>You can configure a message per streamer. You just need to enter your nickname and save or synchronize data to update the follows list.</p>
+
+			<div class="field-group">
+				<div class="field-group">
+					<input type="text" id="nickname" name="nickname" class="do-not-block" placeholder="Enter your Twitch nickname">
+					<button id="save-nickname">Save</button>
+					<button id="sync-follows-list">Sync</button>
+				</div>
+				<span class="error" id="nickname-error"></span>
+				<span id="sync-log"></span>
+			</div>
+			<div id="follows"></div>
+		</div>
+	</div>
+<script type="text/javascript" src="options.js"></script></body>
+</html>
