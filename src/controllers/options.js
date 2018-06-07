@@ -27,10 +27,10 @@ export default class OptionsController {
   }
 
   static async saveNickname(nickname) {
-    await isValidNickname(nickname);
+    await isValidNickname(nickname.trim());
 
     let config = await ExtensionApi.getConfigData();
-    let users = await TwitchApi.getUserDataByUsername(nickname);
+    let users = await TwitchApi.getUserDataByUsername(nickname.trim());
 
     if (users.length === 0) throw new FieldError('This nickname doesn\'t exist on Twitch', 'nickname');
 
@@ -40,7 +40,7 @@ export default class OptionsController {
     };
 
     await ExtensionApi.saveConfigData(config);
-    return config;
+    return config.user;
   }
 
   static async syncFollowsList(userId) {
@@ -50,8 +50,29 @@ export default class OptionsController {
     config.follows = follows;
     ExtensionApi.saveConfigData(config, 'twitch-follows');
 
-    return config;
+    return config.follows;
   }
 
-  // TODO: Save follow message
+  static async saveFollowMessage(nickname, follow, message) {
+    let config = await ExtensionApi.getConfigData('follows');
+
+    if (!config[nickname]) config[nickname] = {};
+
+    if (message === "") {
+      if (config[nickname][follow]) {
+        delete config[nickname][follow];
+      }
+    } else {
+      await isValidMessage(message);
+
+      if (config[nickname][follow]) {
+        config[nickname][follow].message = message;
+      } else {
+        config[nickname][follow] = { message };
+      }
+    }
+
+    await ExtensionApi.saveConfigData(config, 'follows');
+    return config[nickname][follow];
+  }
 }
