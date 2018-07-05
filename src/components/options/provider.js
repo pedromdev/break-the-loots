@@ -5,9 +5,15 @@ import { Provider } from 'react-redux';
 
 import reducers from '../../reducers';
 
+import App from './app';
+
 let store = createStore(
   reducers,
   applyMiddleware(reduxThunk)
 );
 
-export default <Provider store={store}></Provider>;
+// const providerComponent = (<Provider store={store}>
+//   <App />
+// </Provider>);
+
+// export default providerComponent;

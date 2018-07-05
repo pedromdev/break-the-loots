@@ -29,6 +29,13 @@ const configBuilder = (browser) => {
         {
           use: [ 'style-loader', 'css-loader' ],
           test: /\.css$/
+        },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader"
+          }
         }
       ]
     },

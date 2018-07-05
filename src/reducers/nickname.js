@@ -8,7 +8,7 @@ export default (state = undefined, action) => {
       return user;
     case NICKNAME_ERROR:
       let { message } = action.payload;
-      return { ...state, message };
+      return { ...state, errorMessage: message };
     default:
       return state;
   };

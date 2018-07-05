@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { getNickname, saveNickname } from '../../actions';
 
-class InputNickname extends Component {
-
-  static propTypes = {
-    onNicknameChange: PropTypes.func.isRequired
-  };
+class InputNickname extends Component {;
 
   constructor(props) {
+    super(props);
+    
     this.state = {
       nickname: props.nickname
     };
@@ -42,7 +39,7 @@ class InputNickname extends Component {
           type="text"
           id="nickname"
           name="nickname"
-          class="do-not-block"
+          className="do-not-block"
           placeholder="Enter your Twitch nickname"
           value={this.state.nickname} 
           onKeyUp={this.handleKeypress.bind(this)}/>
