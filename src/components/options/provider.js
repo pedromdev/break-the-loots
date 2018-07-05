@@ -12,8 +12,8 @@ let store = createStore(
   applyMiddleware(reduxThunk)
 );
 
-// const providerComponent = (<Provider store={store}>
-//   <App />
-// </Provider>);
+const providerComponent = (<Provider store={store}>
+  <App />
+</Provider>);
 
-// export default providerComponent;
+export default providerComponent;

@@ -31,7 +31,7 @@ const mapStateToProps = (state) => {
   let { user } = state;
 
   return {
-    nicknameError: user.errorMessage
+    nicknameError: !user ? null : user.errorMessage
   };
 };
 

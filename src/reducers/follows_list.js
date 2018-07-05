@@ -1,6 +1,6 @@
 import { GET_FOLLOWS_LIST, SYNC_FOLLOWS_LIST, FOLLOWS_LIST_ERROR } from '../actions/types';
 
-export default (state = undefined, action) => {
+export default (state = null, action) => {
   switch(action.type) {
     case GET_FOLLOWS_LIST:
     case SYNC_FOLLOWS_LIST:

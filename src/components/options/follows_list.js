@@ -54,6 +54,13 @@ class FollowsList extends Component {
 
 const mapStateToProps = (state) => {
   let { follows } = state;
+  let defaultProps = {
+    errorMessage: null,
+    list: []
+  };
+
+  if (!follows) return defaultProps;
+  
   return follows;
 };
 
