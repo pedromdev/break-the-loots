@@ -16,15 +16,17 @@ class FollowItem extends Component {
     };
   }
 
-  componentWillMount() {
-    this.props.getFollowMessage(this.props.follow);
+  componentDidUpdate() {
+    if (this.state.showFieldMessage) {
+      this.props.getFollowMessage(this.props.follow);
+    }
   }
 
   renderFieldMessage() {
     if (!this.state.showFieldMessage) return null;
 
     return (
-      <FieldMessage onSave={this.handleFieldMessageSave.bind(this)}>
+      <FieldMessage onSave={this.handleFieldMessageSave.bind(this)} value={this.props.message}>
         {!this.props.errorMessage ? null : (
           <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
         )}
@@ -62,10 +64,10 @@ FollowItem.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const defaultProps = { message: "" };
+  const defaultProps = { message: undefined };
   let { user, followsConfigs } = state;
   let followConfig = {};
-
+  
   if (!user || !followsConfigs[user.name] || !followsConfigs[user.name][ownProps.follow]) return defaultProps;
 
   followConfig = followsConfigs[user.name][ownProps.follow];

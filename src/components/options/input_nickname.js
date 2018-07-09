@@ -7,15 +7,13 @@ class InputNickname extends Component {;
 
   constructor(props) {
     super(props);
-
-    console.log(props);
     
     this.state = {
       nickname: props.nickname
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getNickname();
   }
 
@@ -28,8 +26,6 @@ class InputNickname extends Component {;
       this.handleSaveNickname();
       return;
     }
-
-    console.log(e.target.value)
 
     this.setState({
       nickname: e.target.value
@@ -45,7 +41,7 @@ class InputNickname extends Component {;
           name="nickname"
           className="do-not-block"
           placeholder="Enter your Twitch nickname"
-          defaultValue={this.state.nickname} 
+          defaultValue={this.props.nickname} 
           onKeyUp={this.handleKeyup.bind(this)}/>
 				<button
           id="save-nickname"

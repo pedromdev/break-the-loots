@@ -3,6 +3,7 @@ const del = require('del');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WriteJsonPlugin = require('write-json-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const EXTENSION_VERSION = '2.0.0';
 
@@ -41,11 +42,8 @@ const configBuilder = (browser) => {
           }
         },
         {
-          use: [ 'style-loader', 'css-loader' ],
-          test: /\.css$/
-        },
-        {
           test: /\.png$/i,
+          exclude: /node_modules/,
           use: [
             {
               loader: 'file-loader',
@@ -67,6 +65,13 @@ const configBuilder = (browser) => {
               }
             },
           ],
+        },
+        {
+          test: /\.css$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            "css-loader"
+          ]
         }
       ]
     },
@@ -81,6 +86,10 @@ const configBuilder = (browser) => {
           object: manifest,
           filename: 'manifest.json',
           pretty: true
+      }),
+      new MiniCssExtractPlugin({
+        filename: "[name].css",
+        chunkFilename: "[id].css"
       }),
       new webpack.DefinePlugin({
         'process.env.BROWSER': JSON.stringify(browser),

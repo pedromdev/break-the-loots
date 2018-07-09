@@ -23,7 +23,7 @@ export const isValidMessage = async (message) => {
   let regexp = /\{(count|time|datetime)\}/g;
 
   if (!regexp.test(message)) {
-    throw new FieldError('You need to add at least one of these variables: {count}, {time}, {datetime}', 'message');
+    throw new FieldError('You must add at least one of these variables: {count}, {time}, {datetime}', 'message');
   } else if (exceedLimitOfCharacters(message)) {
     throw new FieldError('This message must have less than 140 characters', 'message');
   }

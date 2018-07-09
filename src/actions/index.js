@@ -26,7 +26,7 @@ export const saveNickname = nickname => dispatch => {
       payload: { user }
     })
   }).catch((e) => {
-    if (e instanceof FieldError && e.field === 'nickname') {
+    if (e.field === 'nickname') {
       dispatch({
         type: types.NICKNAME_ERROR,
         payload: {
@@ -84,10 +84,12 @@ export const syncFollowsList = () => (dispatch, getState) => {
   })
 };
 
+const hasFollowConfig = (followsConfigs, username, follow) => followsConfigs[username] && followsConfigs[username][follow];
+
 export const getFollowMessage = follow => (dispatch, getState) => {
   let { user, followsConfigs } = getState();
 
-  if (followsConfigs[user.name][follow]) {
+  if (hasFollowConfig(followsConfigs, user.name, follow)) {
     return dispatch({
       type: types.GET_FOLLOW_MESSAGE,
       payload: {
@@ -104,7 +106,7 @@ export const getFollowMessage = follow => (dispatch, getState) => {
       payload: {
         nickname: user.name,
         follow,
-        followConfig: config[user.name][follow]
+        followConfig: hasFollowConfig(config, user.name, follow) ? config[user.name][follow] : null
       }
     });
   }).catch((e) => {
@@ -128,10 +130,12 @@ export const saveFollowMessage = (follow, message) => (dispatch, getState) => {
       }
     });
   }).catch((e) => {
-    if (e instanceof FieldError && e.field === 'message') {
+    if (e.field === 'message') {
       dispatch({
-        type: types.SAVE_FOLLOW_MESSAGE,
+        type: types.FOLLOW_MESSAGE_ERROR,
         payload: {
+          nickname: user.name,
+          follow,
           message: e.message
         }
       });

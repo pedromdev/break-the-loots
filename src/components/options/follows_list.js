@@ -11,12 +11,24 @@ class FollowsList extends Component {
     super(props);
 
     this.state = {
-      follows: props.list
+      follows: props.list,
+      syncronized: false
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getFollowsList();
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.list && !prevState.syncronized) {
+      return {
+        follows: nextProps.list,
+        syncronized: true
+      };
+    }
+
+    return prevState;
   }
 
   handleInputFilterKeyUp(e) {
@@ -32,10 +44,10 @@ class FollowsList extends Component {
       );
     }
 
-    let followsItems = this.state.follows.map((follow) => <FollowItem follow={follow} key={follow} />);
+    let followsItems = this.state.follows.map((followName) => <FollowItem follow={followName} key={followName} />);
 
     return (
-      <div>
+      <div id="follows">
         <div className="field-group">
           <input
             className="do-not-block"
@@ -56,7 +68,7 @@ const mapStateToProps = (state) => {
   let { follows } = state;
   let defaultProps = {
     errorMessage: null,
-    list: []
+    list: null
   };
 
   if (!follows) return defaultProps;

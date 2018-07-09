@@ -1,0 +1,136 @@
+html {
+	background-color: #2f2f2f;
+}
+
+body {
+	margin: 10px;
+	color: #e0e0e0;
+}
+
+h1, h2, h4 {
+	margin-bottom: 0;
+}
+
+h1 {
+	font-size: 15px;
+}
+
+ul {
+	padding-left: 30px;
+	margin-top: 0;
+}
+
+#container {
+	min-width: 400px;
+	align-items: center;
+	display: block;
+	justify-content: space-between;
+}
+
+.collumns {
+	float: left;
+	width: calc(50% - 10px);
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+.collumns:nth-child(2n) {
+	margin-right: 0;
+}
+
+p {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.field-group {
+	margin-bottom: 8px;
+	font-size: 12px;
+}
+
+.field-group label {
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.field-group input[type="text"],
+.field-group input[type="email"],
+.field-group textarea {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 6px 8px;
+	border-radius: 4px;
+	border: 1px solid #2f2f2f;
+	outline: none;
+	background-color: #4f4f4f;
+	resize: none;
+	color: #dfdfdf;
+	font-family: sans-serif;
+}
+
+.field-group input[type="text"]:focus,
+.field-group input[type="email"]:focus,
+.field-group textarea:focus {
+	box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+#nickname {
+	margin-right: 8px;
+}
+
+.error {
+	color: red;
+	font-size: 12px;
+}
+
+.do-not-block {
+	width: auto !important;
+}
+
+button {
+	color: #fff;
+	background-color: #4d90fe;
+	border: 1px solid #3079ed;
+	margin-right: 8px;
+	border-radius: 2px;
+	padding: 4px 8px;
+}
+
+#follows > ul {
+	min-height: 410px;
+	max-height: 410px;
+	overflow-y: scroll;
+	list-style: none;
+	padding: 8px;
+	margin-bottom: 0;
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+#follows > ul::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+#follows > ul::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+ 
+#follows > ul::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    background-color: #505050;
+}
+
+#follows > ul > li {
+	padding: 10px 15px;
+	font-size: 16px;
+}
+
+#follows > ul > li > a {
+	color: #e0e0e0;
+	text-decoration: none;
+}
+
+#follows > ul > li > a:hover {
+	text-decoration: underline;
+}

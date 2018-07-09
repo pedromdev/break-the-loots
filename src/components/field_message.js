@@ -7,6 +7,19 @@ class FieldMessage extends Component {
     super(props, context);
 
     this.messageRef = React.createRef();
+    this.state = {
+      initialized: false
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    let { value } = props;
+
+    if (typeof value !== 'undefined' && !state.initialized) {
+      return Object.assign({}, state, { value, initialized: true });
+    }
+    
+    return null;
   }
 
   handleSaveMessage() {
@@ -15,13 +28,21 @@ class FieldMessage extends Component {
     this.props.onSave(value);
   }
 
+  handleChange(e) {
+    let { value } = e.target;
+    this.setState({ value });
+  }
+
   render() {
     return (
       <div>
         <div className="field-group">
           <label>
             Message:
-            <textarea ref={this.messageRef}>{this.props.value}</textarea>
+            <textarea
+              ref={this.messageRef}
+              value={this.state.value}
+              onChange={this.handleChange.bind(this)}></textarea>
           </label>
           {this.props.children}
         </div>
