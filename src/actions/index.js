@@ -1,7 +1,47 @@
 import * as types from './types';
-import FieldError from '../utils/field_error';
 import ExtensionApi from '../extension_api';
 import OptionsController from '../controllers/options';
+
+export const getDefaultMessage = () => dispatch => {
+  ExtensionApi.getConfigData().then((config) => {
+    let { message } = config;
+
+    dispatch({
+      type: types.GET_MESSAGE,
+      payload: { message }
+    });
+  }).catch((e) => {
+    console.log('General error:', e);
+    dispatch({
+      type: types.EXTENSION_ERROR
+    });
+  });
+};
+
+export const saveDefaultMessage = message => dispatch => {
+  OptionsController.saveMessage(message).then((config) => {
+    let { message } = config;
+
+    dispatch({
+      type: types.SAVE_MESSAGE,
+      payload: { message }
+    });
+  }).catch((e) => {
+    if (e.field === 'message') {
+      dispatch({
+        type: types.MESSAGE_ERROR,
+        payload: {
+          message: e.message
+        }
+      });
+    } else {
+      console.log('General error:', e);
+      dispatch({
+        type: types.EXTENSION_ERROR
+      });
+    }
+  });
+};
 
 export const getNickname = () => dispatch => {
   ExtensionApi.getConfigData().then((config) => {

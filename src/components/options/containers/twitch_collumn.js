@@ -30,6 +30,8 @@ class TwitchCollumn extends Component {
 const mapStateToProps = (state) => {
   let { user } = state;
 
+  console.log(state);
+
   return {
     nicknameError: !user ? null : user.errorMessage
   };

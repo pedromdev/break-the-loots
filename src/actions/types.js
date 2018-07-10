@@ -1,3 +1,7 @@
+export const SAVE_MESSAGE = 'SAVE_MESSAGE';
+export const GET_MESSAGE = 'GET_MESSAGE';
+export const MESSAGE_ERROR = 'MESSAGE_ERROR';
+
 export const SAVE_NICKNAME = 'SAVE_NICKNAME';
 export const GET_NICKNAME = 'GET_NICKNAME';
 export const NICKNAME_ERROR = 'NICKNAME_ERROR';
